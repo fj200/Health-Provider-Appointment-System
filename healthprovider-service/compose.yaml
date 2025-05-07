@@ -1,0 +1,20 @@
+services:
+  mongodb:
+    container_name: 'healthprovider-mongodb-container'
+    image: 'mongo:latest'
+    volumes:
+      - 'mongodb_data:/data/db'
+    environment:
+      - 'MONGO_INITDB_DATABASE=healthprovider-db'
+      - 'MONGO_INITDB_ROOT_PASSWORD=password'
+      - 'MONGO_INITDB_ROOT_USERNAME=user'
+    ports:
+      - '27017:27017'
+    networks:
+      - microservices-network
+volumes:
+  mongodb_data:
+
+networks:
+  microservices-network:
+    driver: bridge
