@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: "appointment-postgres-container"
+    image: 'postgres:latest'
+    volumes:
+      - postgres_data:/data/db
+    environment:
+      - 'POSTGRES_DB=appointment_service'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=user'
+    ports:
+      - '5432:5432'
+    networks:
+      - microservices-network
+volumes:
+  postgres_data:
+
+networks:
+  microservices-network:
+    driver: bridge
+
