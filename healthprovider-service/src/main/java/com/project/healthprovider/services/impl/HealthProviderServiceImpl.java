@@ -5,7 +5,6 @@ import com.project.healthprovider.respository.HealthProviderRepository;
 import com.project.healthprovider.services.HealthProviderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
