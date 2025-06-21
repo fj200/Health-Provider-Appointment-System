@@ -38,9 +38,15 @@ public class GlobalExceptionHandler {
 
         return createResponse(HttpStatus.BAD_REQUEST, errors);
     }
+
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity<APIError> handleClientError(HttpClientErrorException ex){
         return createResponse(HttpStatus.valueOf(ex.getStatusCode().value()), List.of(ex.getMessage(), ex.getResponseBodyAsString()));
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<APIError> handleIllegalState(IllegalStateException ex) {
+        return createResponse(HttpStatus.BAD_REQUEST, List.of(ex.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -48,11 +54,6 @@ public class GlobalExceptionHandler {
         List<String> errors = new ArrayList<>();
         errors.add(ex.getMessage());
         return createResponse(HttpStatus.INTERNAL_SERVER_ERROR, errors);
-    }
-
-    @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<APIError> handleIllegalState(IllegalStateException ex) {
-        return createResponse(HttpStatus.BAD_REQUEST, List.of(ex.getMessage()));
     }
 
     private ResponseEntity<APIError> createResponse(HttpStatus status, List<String> errors) {
